@@ -23,7 +23,7 @@ $(function(){
         getData();
       }
       else
-        $("loading").remove();
+        $("#loading").remove();
     }
   })
 
@@ -31,7 +31,7 @@ $(function(){
     //console.log("Started " + count);
     alert("Start Ajax " + count + " call.");
       $.get('/increment?task=' + count, function(data){
-        $("<tr></tr>").html(data.task).appendTo("table");
+        $("<tr></tr>").html(data.task).insertBefore("#loading");
       //console.log("Finished " + data.task);
     });
   // Hi Stef :p
