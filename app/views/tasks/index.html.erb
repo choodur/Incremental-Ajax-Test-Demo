@@ -17,7 +17,8 @@ $(function(){
   $.ajaxSetup({
     complete: function(){
     alert("Ajax " + count + " Complete.");
-      if(count <= len){
+    $("#loaded").text(count);
+      if(count < len){
         alert("Condition == true, incrementing count, calling next ajax call.");
         count++;
         getData();
