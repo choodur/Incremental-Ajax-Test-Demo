@@ -1,0 +1,44 @@
+<h1>Show Page</h1>
+
+<h2>Loaded Tasks: <span id="loaded">0</span></h1>
+<h2>Total Tasks: <%= @length %></h2>
+<% if @tasks %>
+<table>
+  <tr id="loading">
+    <td>Loading Data...</td>
+  </tr>
+</table>
+<script type="text/javascript">
+$(function(){
+  var len = <%= @length %>;
+  var count = 1;
+  alert("Document Ready.");
+
+  $.ajaxSetup({
+    complete: function(){
+    alert("Ajax " + count + " Complete.");
+      if(count <= len){
+        alert("Condition == true, incrementing count, calling next ajax call.");
+        count++;
+        getData();
+      }
+      else
+        $("loading").remove();
+    }
+  })
+
+  function getData(){
+    //console.log("Started " + count);
+    alert("Start Ajax " + count + " call.");
+      $.get('/increment?task=' + count, function(data){
+        $("<tr></tr>").html(data.task).appendTo("table");
+      //console.log("Finished " + data.task);
+    });
+  // Hi Stef :p
+  }
+
+  getData();
+})
+</script>
+<% end %>
+
